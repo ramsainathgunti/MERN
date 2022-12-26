@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/login.css";
 
 const Login = () => {
@@ -41,6 +42,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="lContainer">
+        <h3>Login</h3>
         <input
           type="text"
           className="lInput"
@@ -61,7 +63,10 @@ const Login = () => {
         </button>
         {error && <span style={{ color: "red" }}>Something went wrong</span>}
         <span>
-          Click here to <button className="lRegister">Register</button>
+          Click here to
+          <Link to="/register">
+            <button className="lRegister">Register</button>
+          </Link>
         </span>
       </div>
     </div>

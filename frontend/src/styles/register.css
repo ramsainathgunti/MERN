@@ -1,0 +1,37 @@
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1b9cfc;
+}
+
+.rContainer {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 300px;
+    border: 1px solid black;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.rInput {
+    border: none;
+    border-bottom: 1px solid #1b9cfc;
+    outline: none;
+    font-weight: 500;
+    font-size: large;
+}
+
+.rButton {
+    background-color: #1b9cfc;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 0;
+    font-weight: 500;
+    font-size: large;
+}
