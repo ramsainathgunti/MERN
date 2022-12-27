@@ -2,12 +2,13 @@ const allowedHosts = ["http://localhost:3000"];
 
 const corsOptions = {
     origin: (origin, callback) => {
-        if (allowedHosts.indexOf(origin) != -1 || !origin) {
+        if (allowedHosts.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
         } else {
-            callback(Error("CORS not allowed"));
+            callback(new Error("CORS not allowed"));
         }
     },
+    optionsSuccessStatus: 200,
 };
 
 module.exports = corsOptions;

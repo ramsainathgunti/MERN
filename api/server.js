@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 //database connection
 connectDB();
 //cors
-app.use(cors(corsOptions));
+app.use(cors());
 
 // middlewares
 app.use(express.json());
