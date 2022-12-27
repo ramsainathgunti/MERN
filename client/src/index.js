@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
-import authReducer from "./redux_store/authReducer";
+import authReducer from "./reducers/authReducer";
 import { configureStore } from "@reduxjs/toolkit";
 
 //redux toolkit store
