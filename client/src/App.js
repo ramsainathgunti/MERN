@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <ToastContainer position="top-center" autoClose={2000} />
+        <ToastContainer position="top-center" />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

@@ -3,15 +3,15 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { login } from "../reducers/authReducer";
-import { useDispatch } from "react-redux";
+//import { login } from "../reducers/authReducer";
+//import { useDispatch } from "react-redux";
 
 const Register = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const Register = () => {
       toast.success("Register successful");
 
       console.log("Registered User", res);
-      dispatch(login(res.data.details));
+      //dispatch(login(res.data.details));
       navigate("/login");
     } catch (err) {
       console.log(err);
@@ -73,7 +73,11 @@ const Register = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
+              <button
+                type="submit"
+                disabled={!userName || !email || !password}
+                className="btn btn-dark"
+              >
                 Register
               </button>
             </form>

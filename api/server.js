@@ -7,6 +7,7 @@ const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const connectDB = require("./config/connectDB");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
 //database connection
 connectDB();
@@ -17,6 +18,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+
+//cookie parser
+
+app.use(cookieParser());
 
 //routes
 app.use("/api/v1/auth", require("./routes/auth"));
