@@ -5,12 +5,12 @@ import { logout } from "../reducers/authReducer";
 import axios from "axios";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user.value);
+  const { username } = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const handleLogout = async () => {
     try {
       const res = await axios.get("/auth/logout");
-      dispatch(logout(null));
+      dispatch(logout({ username: "", email: "" }));
       localStorage.removeItem("LoggedInUser");
       console.log(res);
     } catch (err) {
@@ -20,9 +20,9 @@ const Navbar = () => {
   return (
     <div className="navbar  bg-dark  d-flex justify-content-between ">
       <Link to="/" className="nav-link text-white fs-4">
-        Home {JSON.stringify(user)}
+        Home {JSON.stringify(username)}
       </Link>
-      {user === null && (
+      {username === "" && (
         <>
           <Link to="/login" className="nav-link text-white fs-4">
             Login
@@ -32,7 +32,13 @@ const Navbar = () => {
           </Link>
         </>
       )}
-      {user !== null && (
+
+      {username !== "" && (
+        <Link to="/dashboard" className="nav-link text-white fs-4">
+          Dashboard
+        </Link>
+      )}
+      {username !== "" && (
         <Link
           to="/login"
           className="nav-link text-white fs-4"

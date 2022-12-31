@@ -19,12 +19,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
+//app.use(verifyJWT());
+
 //cookie parser
 
 app.use(cookieParser());
 
 //routes
 app.use("/api/v1/auth", require("./routes/auth"));
+app.use("/api/v1/stripe", require("./routes/stripe"));
 
 mongoose.connection.once("open", () => {
     console.log("Connected to database");

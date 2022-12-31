@@ -8,8 +8,9 @@ const Login = async(req, res) => {
         const { username, password } = req.body;
         if (!username || !password)
             return res.status(400).json("Enter username and password");
-        const foundUser = await User.findOne({ username });
-        if (!foundUser) return res.status(404).json("Please register");
+        const foundUser = await User.findOne({ username }).exec();
+        if (!foundUser)
+            return res.status(404).json("User does not exist! Please register");
         const match = await bcrypt.compare(password, foundUser.password);
         if (!match) return res.status(403).json("Password Incorrect");
         const access_token = jwt.sign({
@@ -23,7 +24,12 @@ const Login = async(req, res) => {
         });
         res.status(200).json({
             message: "Login Successful",
-            user: { username: foundUser.username, email: foundUser.email },
+            user: {
+                username: foundUser.username,
+                email: foundUser.email,
+                createdAt: foundUser.createdAt,
+                token: access_token,
+            },
         });
     } catch (err) {
         console.log("Authentication failed", err);

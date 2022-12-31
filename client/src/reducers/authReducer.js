@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userState = localStorage.getItem("LoggedInItem");
+const userState = JSON.parse(localStorage.getItem("LoggedInUser")) || {};
 
 // if (localStorage.getItem("LoggedInUser")) {
 //     userState = JSON.stringify(localStorage.getItem("LoggedInUser"));
@@ -8,7 +8,12 @@ const userState = localStorage.getItem("LoggedInItem");
 //     userState = null;
 // }
 
-const initialState = {};
+const initialState = {
+    username: userState.username || "",
+    email: userState.email || "",
+    createdAt: userState.createdAt,
+    token: userState.token,
+};
 
 export const authSlice = createSlice({
     name: "user",

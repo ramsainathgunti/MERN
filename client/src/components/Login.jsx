@@ -22,14 +22,15 @@ const Login = () => {
         password: password,
       });
 
-      navigate("/");
+      navigate("/dashboard");
       console.log(res);
-
+      console.log(res.cookies);
       localStorage.setItem("LoggedInUser", JSON.stringify(res.data.user));
       dispatch(login(res.data.user));
       toast.success("Login Successful");
     } catch (err) {
-      if (err.response.status === 403) toast.error(err.response.data);
+      if (err.response.status === 403 || err.response.status === 404)
+        toast.error(err.response.data);
       console.log(err);
     }
   };
