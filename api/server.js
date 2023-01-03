@@ -8,6 +8,10 @@ const path = require("path");
 require("dotenv").config();
 const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
+const cors = require("cors");
+
+const { Register } = require("./controllers/authController");
+const verifyJWT = require("./middlewares/verifyJWT");
 
 /* MiddleWares */
 app.use(express.json());
@@ -18,6 +22,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use(cors());
 
 //File Storage
 
@@ -31,6 +36,13 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+//File Routes
+
+app.post("api/auth/register", upload.single("picture"), Register);
+
+//Routes
+app.use("/api/auth", require("./routes/authRoutes"));
 
 //DB connection and Server Conf
 
