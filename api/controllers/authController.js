@@ -39,9 +39,11 @@ const Register = async(req, res) => {
 const Login = async(req, res) => {
     try {
         const { email, password } = req.body;
+        if (!email || !password)
+            return res.status(400).json({ message: "Provide email and password" });
         const foundUser = await User.findOne({ email });
         if (!foundUser) return res.status(400).json("User not found");
-        const match = await bcrypt.compare(foundUser.password, password);
+        const match = await bcrypt.compare(password, foundUser.password);
         if (!match) return res.status(400).json("Invalid credentials");
         const token = jwt.sign({ id: foundUser._id },
             process.env.ACCESS_SECRET_TOKEN, { expiresIn: "1d" }
