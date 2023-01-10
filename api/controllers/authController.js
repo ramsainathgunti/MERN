@@ -27,8 +27,8 @@ const Register = async(req, res) => {
             friends,
             occupation,
             location,
-            viewedProfile: Math.random() * 10000,
-            impressions: Math.random() * 10000,
+            viewedProfile: Math.floor(Math.random() * 1000),
+            impressions: Math.floor(Math.random() * 1000),
         });
         res.status(201).json(savedUser);
     } catch (err) {
